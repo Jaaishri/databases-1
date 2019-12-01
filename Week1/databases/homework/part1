@@ -1,0 +1,33 @@
+ CREATE TABLE country
+    (
+      id INT AUTO_INCREMENT,
+      name VARCHAR(30) NOT NULL UNIQUE,
+      capital VARCHAR(30) NOT NULL,
+      population INT NOT NULL,
+      PRIMARY KEY(id)
+);
+
+ CREATE TABLE city
+  (
+    id INT AUTO_INCREMENT,country_id INT NOT NULL,
+    name VARCHAR(30) NOT NULL UNIQUE,
+    population INT NOT NULL,
+    codeNumber INT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(country_id) REFERENCES country(id)
+  );
+
+INSERT INTO country(code, Name, Continent, Population) 
+values ('FRA', 'FRANCE', 'Europe', 8000000),
+('SWE', 'SWEDEN', 'Europe', 9000000),
+('NOR', 'Norway', 'Europe', 4478500),
+(''NLD'', 'Netherlands', 'Europe', 7000000),
+('POL', 'Poland', 'Europe', 1200000);
+
+INSERT INTO city(ID, Name, CountryCode, Population) 
+values (1, 'Paris', 'FRA', 300000),
+(2, 'Finland', 'Europe', 600000),
+(3, 'Yugoslavia', 'Europe', 8000000),
+(4, 'Lund', 'SWE', 80000),
+(5, 'Paris', 'FRA', 900000),
+(4, 'Malmo', 'SWE', 100000);
