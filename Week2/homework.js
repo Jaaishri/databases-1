@@ -34,9 +34,9 @@ async function queryDb() {
     userMakeChoices = choices.choice;
 
     const chooseFirstQuery = `SELECT name from city where id in (select capital from country where name = ?)`;
-    const chooseSecondQuery = `SELECT countrylanguage.language ,country.region FROM country JOIN countrylanguage ON countrylanguage.CountryCode = country.code WHERE country.region = ?;`;
+    const chooseSecondQuery = `SELECT distinct countrylanguage.language ,country.region FROM country JOIN countrylanguage ON countrylanguage.CountryCode = country.code WHERE country.region = ?`;
     const chooseThirdQuery = `SELECT COUNT(city.Name) AS total FROM countrylanguage JOIN city ON city.CountryCode = countrylanguage.CountryCode WHERE countrylanguage.language = ?`;
-    const chooseFourthQuery = `SELECT continent, COUNT(DISTINCT language) AS numberOflanguages FROM country LEFT JOIN countrylanguage ON country.code = countrylanguage.countryCode GROUP BY continent`;
+    const chooseFourthQuery = `SELECT continent, COUNT(DISTINCT language) AS numberOflanguages FROM country inner JOIN countrylanguage ON country.code = countrylanguage.countryCode GROUP BY continent`;
     const chooseFifthQuery = `SELECT country.Name FROM country, countrylanguage WHERE (country.Code = countrylanguage.CountryCode) AND (country.Region= ?) AND (countrylanguage.Language= ?) AND IsOfficial = 'T'`;
 
     switch (userMakeChoices) {
